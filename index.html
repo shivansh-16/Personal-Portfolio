@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Doe - Web Developer Portfolio</title>
+    <title>Shivansh Pawar - Web Developer | Turning Ideas into Digital Reality</title>
+    <meta name="description" content="Shivansh Pawar - Web Developer specializing in modern web applications. Turning ideas into digital reality with clean code and exceptional user experiences.">
+    <meta name="keywords" content="Shivansh Pawar, Web Developer, Frontend, Backend, React, JavaScript, Portfolio">
+    <meta name="author" content="Shivansh Pawar">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Shivansh Pawar - Web Developer">
+    <meta property="og:description" content="Turning Ideas into Digital Reality">
+    <meta property="og:type" content="website">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home">JD</a>
+                <a href="#home">&lt;SP /&gt;</a>
             </div>
             <ul class="nav-menu" id="nav-menu">
                 <li class="nav-item">
@@ -44,28 +55,77 @@
 
     <!-- Home Section -->
     <section id="home" class="hero">
+        <div class="code-bg" id="code-bg"></div>
         <div class="hero-container">
-            <div class="hero-content">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <div class="greeting">Hello, I'm</div>
                 <h1 class="hero-title">
-                    Hi, I'm <span class="highlight">John Doe</span>
+                    <span class="highlight">Shivansh Pawar</span>
                 </h1>
-                <h2 class="hero-subtitle">Full Stack Web Developer</h2>
+                <h2 class="hero-subtitle">
+                    <span class="typing-container">
+                        <span id="typing-text">Web Developer</span>
+                        <span class="cursor">|</span>
+                    </span>
+                </h2>
                 <p class="hero-description">
-                    I create beautiful, responsive websites and web applications using modern technologies. 
-                    Passionate about clean code, user experience, and bringing ideas to life.
+                    Turning Ideas into Digital Reality
+                </p>
+                <p class="hero-tagline">
+                    I'm passionate about creating exceptional digital experiences through clean code, 
+                    innovative solutions, and user-centered design. Let's build something amazing together.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        View My Work
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Get In Touch
+                    </a>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="hero-avatar">
-                    <i class="fas fa-code"></i>
+            <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="code-editor">
+                    <div class="editor-header">
+                        <div class="editor-controls">
+                            <span class="control red"></span>
+                            <span class="control yellow"></span>
+                            <span class="control green"></span>
+                        </div>
+                        <div class="editor-title">portfolio.js</div>
+                    </div>
+                    <div class="editor-content">
+                        <div class="code-line">
+                            <span class="line-number">1</span>
+                            <span class="code"><span class="keyword">const</span> <span class="variable">developer</span> = {</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">2</span>
+                            <span class="code">  <span class="property">name</span>: <span class="string">'Shivansh Pawar'</span>,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">3</span>
+                            <span class="code">  <span class="property">role</span>: <span class="string">'Web Developer'</span>,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">4</span>
+                            <span class="code">  <span class="property">passion</span>: <span class="string">'Creating amazing UX'</span>,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">5</span>
+                            <span class="code">  <span class="property">skills</span>: [<span class="string">'React'</span>, <span class="string">'Node.js'</span>]</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">6</span>
+                            <span class="code">};</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="1000">
             <a href="#about" class="scroll-arrow">
                 <i class="fas fa-chevron-down"></i>
             </a>
@@ -75,41 +135,73 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title" data-aos="fade-up">About Me</h2>
             <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I'm a passionate web developer with over 3 years of experience creating digital solutions 
-                        that make a difference. My journey in web development started with a curiosity about how 
-                        websites work, and it has evolved into a career dedicated to building exceptional user experiences.
-                    </p>
-                    <p>
-                        I specialize in full-stack development, working with modern frameworks and technologies 
-                        to build scalable, maintainable applications. I believe in writing clean, efficient code 
-                        and staying up-to-date with the latest industry trends and best practices.
-                    </p>
-                    <p>
-                        When I'm not coding, you can find me exploring new technologies, contributing to open-source 
-                        projects, or sharing my knowledge through technical blog posts and mentoring.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>50+</h3>
-                            <p>Projects Completed</p>
-                        </div>
-                        <div class="stat">
-                            <h3>3+</h3>
-                            <p>Years Experience</p>
-                        </div>
-                        <div class="stat">
-                            <h3>20+</h3>
-                            <p>Happy Clients</p>
-                        </div>
+                <div class="about-text" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="about-intro">
+                        <h3>Who I Am</h3>
+                        <p>
+                            I'm Shivansh Pawar, a passionate web developer dedicated to crafting exceptional digital experiences. 
+                            My journey in web development is driven by a love for clean, efficient code and a commitment to 
+                            turning innovative ideas into functional, beautiful realities.
+                        </p>
+                    </div>
+                    
+                    <div class="about-passion">
+                        <h3>My Passion</h3>
+                        <p>
+                            I thrive on the challenge of transforming complex problems into elegant solutions. 
+                            My passion lies in creating user-centered designs that not only look stunning but also 
+                            provide seamless, intuitive experiences. Every line of code I write is aimed at making 
+                            the web a better, more accessible place.
+                        </p>
+                    </div>
+                    
+                    <div class="about-tech">
+                        <h3>Technologies I Work With</h3>
+                        <p>
+                            I specialize in modern web technologies including React, JavaScript, Node.js, and responsive design. 
+                            I'm constantly learning and adapting to new tools and frameworks to stay at the forefront of 
+                            web development trends and best practices.
+                        </p>
+                    </div>
+                    
+                    <div class="about-cta">
+                        <a href="#projects" class="btn btn-outline">
+                            <i class="fas fa-code"></i>
+                            See My Work
+                        </a>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-user-circle"></i>
+                
+                <div class="about-visual" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <div class="image-placeholder">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="profile-badge">
+                                <i class="fas fa-code"></i>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h4>Shivansh Pawar</h4>
+                            <p>Web Developer</p>
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">50+</span>
+                                    <span class="stat-label">Projects</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">2+</span>
+                                    <span class="stat-label">Years</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">100%</span>
+                                    <span class="stat-label">Passion</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,82 +211,146 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">My Projects</h2>
-            <p class="section-subtitle">Here are some of my recent projects that showcase my skills and experience</p>
+            <h2 class="section-title" data-aos="fade-up">My Projects</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Here are some of my key projects that showcase my skills and passion for web development
+            </p>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                     <div class="project-image">
-                        <i class="fas fa-shopping-cart"></i>
+                        <div class="project-preview">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-eye"></i>
+                                <span>View Project</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
                         <h3>E-Commerce Platform</h3>
-                        <p>A full-stack e-commerce solution built with React, Node.js, and MongoDB. Features include user authentication, product management, and payment integration.</p>
+                        <p>A full-stack e-commerce solution with modern UI/UX, secure payment processing, and real-time inventory management. Built with React and Node.js for optimal performance.</p>
                         <div class="project-tags">
                             <span class="tag">React</span>
                             <span class="tag">Node.js</span>
                             <span class="tag">MongoDB</span>
-                            <span class="tag">Stripe</span>
+                            <span class="tag">Stripe API</span>
+                            <span class="tag">JWT Auth</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link primary">
                                 <i class="fas fa-external-link-alt"></i>
                                 Live Demo
                             </a>
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link secondary">
                                 <i class="fab fa-github"></i>
-                                Source Code
+                                GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                     <div class="project-image">
-                        <i class="fas fa-tasks"></i>
+                        <div class="project-preview">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-eye"></i>
+                                <span>View Project</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3>Task Management App</h3>
-                        <p>A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
+                        <h3>Task Management Dashboard</h3>
+                        <p>A collaborative productivity app with drag-and-drop kanban boards, real-time updates, team collaboration features, and advanced project analytics.</p>
                         <div class="project-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">Express.js</span>
+                            <span class="tag">React</span>
+                            <span class="tag">TypeScript</span>
                             <span class="tag">Socket.io</span>
+                            <span class="tag">Express.js</span>
                             <span class="tag">PostgreSQL</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link primary">
                                 <i class="fas fa-external-link-alt"></i>
                                 Live Demo
                             </a>
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link secondary">
                                 <i class="fab fa-github"></i>
-                                Source Code
+                                GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
                     <div class="project-image">
-                        <i class="fas fa-blog"></i>
+                        <div class="project-preview">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-eye"></i>
+                                <span>View Project</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3>Personal Blog Platform</h3>
-                        <p>A modern blog platform with markdown support, comment system, and admin dashboard for content management.</p>
+                        <h3>Responsive Landing Page</h3>
+                        <p>A modern, fully responsive landing page with smooth animations, optimized performance, and pixel-perfect design implementation from Figma mockups.</p>
                         <div class="project-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Prisma</span>
-                            <span class="tag">Tailwind CSS</span>
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">GSAP</span>
+                            <span class="tag">Responsive</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link primary">
                                 <i class="fas fa-external-link-alt"></i>
                                 Live Demo
                             </a>
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link secondary">
                                 <i class="fab fa-github"></i>
-                                Source Code
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                    <div class="project-image">
+                        <div class="project-preview">
+                            <i class="fas fa-blog"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-eye"></i>
+                                <span>View Project</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Personal Blog Platform</h3>
+                        <p>A modern blog platform with markdown support, dark/light themes, SEO optimization, and an intuitive content management system for easy publishing.</p>
+                        <div class="project-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">MDX</span>
+                            <span class="tag">Tailwind CSS</span>
+                            <span class="tag">Vercel</span>
+                            <span class="tag">SEO</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link primary">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                            <a href="#" class="project-link secondary">
+                                <i class="fab fa-github"></i>
+                                GitHub
                             </a>
                         </div>
                     </div>
@@ -206,95 +362,174 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <p class="section-subtitle">Technologies I work with to bring ideas to life</p>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML5</span>
+            <h2 class="section-title" data-aos="fade-up">Skills & Technologies</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                The technologies and tools I use to bring ideas to life
+            </p>
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h3>Frontend Development</h3>
                         </div>
-                        <div class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS3</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-js-square"></i>
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-react"></i>
-                            <span>React</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-vue"></i>
-                            <span>Vue.js</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-sass"></i>
-                            <span>Sass</span>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fab fa-html5"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML5</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fab fa-css3-alt"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">CSS3 & Sass</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fab fa-js-square"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">JavaScript</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="88%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fab fa-react"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">React</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <i class="fab fa-node-js"></i>
-                            <span>Node.js</span>
+                    <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3>Backend Development</h3>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-server"></i>
-                            <span>Express.js</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>MongoDB</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>PostgreSQL</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-fire"></i>
-                            <span>Firebase</span>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fab fa-node-js"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Node.js</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Express.js</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="78%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">MongoDB</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="75%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">MySQL</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="70%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="skill-category">
-                    <h3>Tools & Others</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
+                    <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>Tools & Platforms</h3>
                         </div>
-                        <div class="skill-item">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-figma"></i>
-                            <span>Figma</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>Responsive Design</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-rocket"></i>
-                            <span>Performance Optimization</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-universal-access"></i>
-                            <span>Accessibility</span>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fab fa-git-alt"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Git & GitHub</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fab fa-figma"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Figma</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">VS Code</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Responsive Design</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="92%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

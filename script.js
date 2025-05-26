@@ -1,3 +1,13 @@
+// Initialize AOS (Animate On Scroll)
+document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({
+        duration: 800,
+        easing: 'ease-out',
+        once: true,
+        offset: 100
+    });
+});
+
 // DOM Elements
 const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
@@ -19,29 +29,31 @@ class Navigation {
     }
 
     setupMobileMenu() {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
-        });
-
-        // Close mobile menu when clicking on a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
             });
-        });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
+            // Close mobile menu when clicking on a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
     }
 
     setupSmoothScrolling() {
@@ -113,12 +125,90 @@ class Navigation {
     setupNavbarBackground() {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
-                navbar.style.background = 'hsla(220, 13%, 18%, 0.98)';
-                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+                navbar.style.backdropFilter = 'blur(25px)';
             } else {
-                navbar.style.background = 'hsla(220, 13%, 18%, 0.95)';
-                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                navbar.style.backdropFilter = 'blur(20px)';
             }
+        });
+    }
+}
+
+// Typing Animation for Hero Section
+class TypingAnimation {
+    constructor(element, texts, typeSpeed = 100, deleteSpeed = 50, delayBetween = 2000) {
+        this.element = element;
+        this.texts = texts;
+        this.typeSpeed = typeSpeed;
+        this.deleteSpeed = deleteSpeed;
+        this.delayBetween = delayBetween;
+        this.currentTextIndex = 0;
+        this.currentCharIndex = 0;
+        this.isDeleting = false;
+        
+        if (this.element) {
+            this.init();
+        }
+    }
+
+    init() {
+        this.type();
+    }
+
+    type() {
+        const currentText = this.texts[this.currentTextIndex];
+        
+        if (this.isDeleting) {
+            this.element.textContent = currentText.substring(0, this.currentCharIndex - 1);
+            this.currentCharIndex--;
+        } else {
+            this.element.textContent = currentText.substring(0, this.currentCharIndex + 1);
+            this.currentCharIndex++;
+        }
+
+        let typeSpeed = this.isDeleting ? this.deleteSpeed : this.typeSpeed;
+
+        if (!this.isDeleting && this.currentCharIndex === currentText.length) {
+            typeSpeed = this.delayBetween;
+            this.isDeleting = true;
+        } else if (this.isDeleting && this.currentCharIndex === 0) {
+            this.isDeleting = false;
+            this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
+        }
+
+        setTimeout(() => this.type(), typeSpeed);
+    }
+}
+
+// Skill Progress Animation
+class SkillProgressAnimation {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBar = entry.target;
+                    const width = progressBar.getAttribute('data-width');
+                    if (width) {
+                        progressBar.style.setProperty('--progress-width', width);
+                        progressBar.style.width = width;
+                        progressBar.classList.add('animate');
+                    }
+                    observer.unobserve(progressBar);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        skillBars.forEach(bar => {
+            observer.observe(bar);
         });
     }
 }
@@ -127,7 +217,9 @@ class Navigation {
 class ContactForm {
     constructor(form) {
         this.form = form;
-        this.init();
+        if (this.form) {
+            this.init();
+        }
     }
 
     init() {
@@ -204,7 +296,7 @@ class ContactForm {
     }
 
     showError(field, message) {
-        field.style.borderColor = 'hsl(0, 84%, 60%)';
+        field.style.borderColor = '#EF4444';
         const errorElement = document.getElementById(`${field.name}-error`);
         if (errorElement) {
             errorElement.textContent = message;
@@ -243,10 +335,12 @@ class ContactForm {
         }
 
         const submitButton = this.form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
+        const btnText = submitButton.querySelector('.btn-text');
+        const btnLoader = submitButton.querySelector('.btn-loader');
         
         // Show loading state
-        submitButton.textContent = 'Sending...';
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'flex';
         submitButton.disabled = true;
 
         try {
@@ -262,7 +356,8 @@ class ContactForm {
             this.showErrorMessage('Failed to send message. Please try again.');
         } finally {
             // Reset button state
-            submitButton.textContent = originalText;
+            btnText.style.display = 'flex';
+            btnLoader.style.display = 'none';
             submitButton.disabled = false;
         }
     }
@@ -275,140 +370,173 @@ class ContactForm {
     }
 
     showSuccessMessage() {
-        const message = document.createElement('div');
-        message.className = 'success-message';
-        message.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: hsl(142, 71%, 45%);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            z-index: 1001;
-            animation: slideInRight 0.3s ease-out;
-        `;
-        message.textContent = 'Message sent successfully! I\'ll get back to you soon.';
-        
-        document.body.appendChild(message);
-        
-        setTimeout(() => {
-            message.style.animation = 'slideOutRight 0.3s ease-out';
-            setTimeout(() => {
-                document.body.removeChild(message);
-            }, 300);
-        }, 5000);
+        this.showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
     }
 
     showErrorMessage(text) {
-        const message = document.createElement('div');
-        message.className = 'error-message-toast';
-        message.style.cssText = `
+        this.showToast(text, 'error');
+    }
+
+    showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.style.cssText = `
             position: fixed;
             top: 100px;
             right: 20px;
-            background: hsl(0, 84%, 60%);
+            background: ${type === 'success' ? '#10B981' : '#EF4444'};
             color: white;
             padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             z-index: 1001;
-            animation: slideInRight 0.3s ease-out;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            max-width: 300px;
+            font-weight: 500;
         `;
-        message.textContent = text;
+        toast.textContent = message;
         
-        document.body.appendChild(message);
+        document.body.appendChild(toast);
         
+        // Trigger animation
         setTimeout(() => {
-            message.style.animation = 'slideOutRight 0.3s ease-out';
+            toast.style.transform = 'translateX(0)';
+        }, 100);
+        
+        // Remove toast
+        setTimeout(() => {
+            toast.style.transform = 'translateX(100%)';
             setTimeout(() => {
-                document.body.removeChild(message);
+                if (document.body.contains(toast)) {
+                    document.body.removeChild(toast);
+                }
             }, 300);
         }, 5000);
     }
 }
 
-// Scroll animations
-class ScrollAnimations {
+// Background Code Animation
+class CodeBackgroundAnimation {
     constructor() {
         this.init();
     }
 
     init() {
-        this.setupIntersectionObserver();
+        const codeBg = document.getElementById('code-bg');
+        if (codeBg) {
+            this.createFloatingCode(codeBg);
+        }
     }
 
-    setupIntersectionObserver() {
-        const animatedElements = document.querySelectorAll('.project-card, .skill-category, .contact-item');
-        
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+    createFloatingCode(container) {
+        const codeSnippets = [
+            'const developer = "Shivansh";',
+            'function createAwesome() {',
+            'return innovation + passion;',
+            'if (idea.isGreat()) {',
+            'let skills = ["React", "Node"];',
+            'async function build() {',
+            'console.log("Building...");',
+            'export default Portfolio;'
+        ];
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        const fragment = document.createDocumentFragment();
 
-        animatedElements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(element);
-        });
+        for (let i = 0; i < 15; i++) {
+            const codeElement = document.createElement('div');
+            codeElement.className = 'floating-code';
+            codeElement.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+            codeElement.style.cssText = `
+                position: absolute;
+                font-family: 'Fira Code', monospace;
+                font-size: 0.75rem;
+                color: rgba(59, 130, 246, 0.1);
+                pointer-events: none;
+                white-space: nowrap;
+                animation: float ${15 + Math.random() * 10}s linear infinite;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                animation-delay: ${Math.random() * 5}s;
+            `;
+            fragment.appendChild(codeElement);
+        }
+
+        container.appendChild(fragment);
     }
 }
 
-// Typing animation for hero section
-class TypingAnimation {
-    constructor(element, texts, typeSpeed = 100, deleteSpeed = 50, delayBetween = 2000) {
-        this.element = element;
-        this.texts = texts;
-        this.typeSpeed = typeSpeed;
-        this.deleteSpeed = deleteSpeed;
-        this.delayBetween = delayBetween;
-        this.currentTextIndex = 0;
-        this.currentCharIndex = 0;
-        this.isDeleting = false;
-        
-        if (this.element) {
-            this.init();
-        }
+// Accessibility enhancements
+class AccessibilityEnhancer {
+    constructor() {
+        this.init();
     }
 
     init() {
-        this.type();
+        this.setupKeyboardNavigation();
+        this.setupFocusManagement();
+        this.addSkipLink();
     }
 
-    type() {
-        const currentText = this.texts[this.currentTextIndex];
+    setupKeyboardNavigation() {
+        // Enhanced keyboard navigation for mobile menu
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                if (hamburger) hamburger.focus();
+            }
+        });
+    }
+
+    setupFocusManagement() {
+        // Improve focus visibility
+        const focusableElements = document.querySelectorAll(
+            'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        );
+
+        focusableElements.forEach(element => {
+            element.addEventListener('focus', () => {
+                element.style.outline = '2px solid #3B82F6';
+                element.style.outlineOffset = '2px';
+            });
+
+            element.addEventListener('blur', () => {
+                element.style.outline = '';
+                element.style.outlineOffset = '';
+            });
+        });
+    }
+
+    addSkipLink() {
+        const skipLink = document.createElement('a');
+        skipLink.href = '#home';
+        skipLink.textContent = 'Skip to main content';
+        skipLink.className = 'skip-link';
+        skipLink.style.cssText = `
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #3B82F6;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 1002;
+            transition: top 0.3s;
+            font-weight: 500;
+        `;
         
-        if (this.isDeleting) {
-            this.element.textContent = currentText.substring(0, this.currentCharIndex - 1);
-            this.currentCharIndex--;
-        } else {
-            this.element.textContent = currentText.substring(0, this.currentCharIndex + 1);
-            this.currentCharIndex++;
-        }
-
-        let typeSpeed = this.isDeleting ? this.deleteSpeed : this.typeSpeed;
-
-        if (!this.isDeleting && this.currentCharIndex === currentText.length) {
-            typeSpeed = this.delayBetween;
-            this.isDeleting = true;
-        } else if (this.isDeleting && this.currentCharIndex === 0) {
-            this.isDeleting = false;
-            this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
-        }
-
-        setTimeout(() => this.type(), typeSpeed);
+        skipLink.addEventListener('focus', () => {
+            skipLink.style.top = '6px';
+        });
+        
+        skipLink.addEventListener('blur', () => {
+            skipLink.style.top = '-40px';
+        });
+        
+        document.body.insertBefore(skipLink, document.body.firstChild);
     }
 }
 
@@ -420,8 +548,8 @@ class PerformanceOptimizer {
 
     init() {
         this.optimizeImages();
-        this.setupLazyLoading();
         this.preloadCriticalResources();
+        this.setupIntersectionObserver();
     }
 
     optimizeImages() {
@@ -432,7 +560,23 @@ class PerformanceOptimizer {
         });
     }
 
-    setupLazyLoading() {
+    preloadCriticalResources() {
+        // Preload critical assets
+        const criticalResources = [
+            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap',
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+        ];
+
+        criticalResources.forEach(resource => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = resource;
+            link.as = 'style';
+            document.head.appendChild(link);
+        });
+    }
+
+    setupIntersectionObserver() {
         // Lazy load non-critical content
         const lazyElements = document.querySelectorAll('.project-card, .skill-category');
         
@@ -451,203 +595,108 @@ class PerformanceOptimizer {
             });
         }
     }
-
-    preloadCriticalResources() {
-        // Preload critical fonts and assets
-        const fontLink = document.createElement('link');
-        fontLink.rel = 'preload';
-        fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
-        fontLink.as = 'style';
-        document.head.appendChild(fontLink);
-    }
 }
 
-// Accessibility enhancements
-class AccessibilityEnhancer {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        this.setupKeyboardNavigation();
-        this.setupFocusManagement();
-        this.setupScreenReaderSupport();
-    }
-
-    setupKeyboardNavigation() {
-        // Enhanced keyboard navigation for mobile menu
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                hamburger.focus();
-            }
-        });
-
-        // Skip to main content link
-        const skipLink = document.createElement('a');
-        skipLink.href = '#home';
-        skipLink.textContent = 'Skip to main content';
-        skipLink.className = 'skip-link';
-        skipLink.style.cssText = `
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: hsl(220, 90%, 56%);
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            border-radius: 4px;
-            z-index: 1002;
-            transition: top 0.3s;
-        `;
-        
-        skipLink.addEventListener('focus', () => {
-            skipLink.style.top = '6px';
-        });
-        
-        skipLink.addEventListener('blur', () => {
-            skipLink.style.top = '-40px';
-        });
-        
-        document.body.insertBefore(skipLink, document.body.firstChild);
-    }
-
-    setupFocusManagement() {
-        // Trap focus in mobile menu when open
-        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab' && navMenu.classList.contains('active')) {
-                const focusable = navMenu.querySelectorAll(focusableElements);
-                const firstFocusable = focusable[0];
-                const lastFocusable = focusable[focusable.length - 1];
-
-                if (e.shiftKey) {
-                    if (document.activeElement === firstFocusable) {
-                        lastFocusable.focus();
-                        e.preventDefault();
-                    }
-                } else {
-                    if (document.activeElement === lastFocusable) {
-                        firstFocusable.focus();
-                        e.preventDefault();
-                    }
-                }
-            }
-        });
-    }
-
-    setupScreenReaderSupport() {
-        // Add ARIA labels and descriptions
-        hamburger.setAttribute('aria-label', 'Toggle navigation menu');
-        hamburger.setAttribute('aria-expanded', 'false');
-        
-        const originalHamburgerClick = hamburger.onclick;
-        hamburger.addEventListener('click', () => {
-            const isExpanded = navMenu.classList.contains('active');
-            hamburger.setAttribute('aria-expanded', isExpanded.toString());
-        });
-
-        // Add live region for form feedback
-        const liveRegion = document.createElement('div');
-        liveRegion.setAttribute('aria-live', 'polite');
-        liveRegion.setAttribute('aria-atomic', 'true');
-        liveRegion.style.cssText = 'position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;';
-        document.body.appendChild(liveRegion);
-    }
-}
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize core functionality
+// Initialize all components when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize navigation
     new Navigation();
     
-    if (contactForm) {
-        new ContactForm(contactForm);
+    // Initialize typing animation
+    const typingElement = document.getElementById('typing-text');
+    if (typingElement) {
+        new TypingAnimation(typingElement, [
+            'Web Developer',
+            'Frontend Specialist',
+            'UI/UX Enthusiast',
+            'Problem Solver',
+            'Creative Coder'
+        ], 120, 80, 2500);
     }
     
-    new ScrollAnimations();
-    new PerformanceOptimizer();
+    // Initialize skill progress animation
+    new SkillProgressAnimation();
+    
+    // Initialize contact form
+    new ContactForm(contactForm);
+    
+    // Initialize background animation
+    new CodeBackgroundAnimation();
+    
+    // Initialize accessibility enhancements
     new AccessibilityEnhancer();
     
-    // Initialize typing animation for subtitle
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) {
-        new TypingAnimation(heroSubtitle, [
-            'Full Stack Web Developer',
-            'Frontend Specialist', 
-            'UI/UX Enthusiast',
-            'Problem Solver'
-        ]);
-    }
+    // Initialize performance optimizations
+    new PerformanceOptimizer();
     
-    // Add custom animations for toast messages
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
+    // Add smooth reveal animation for elements
+    const revealElements = document.querySelectorAll('.project-card, .skill-category, .contact-item');
+    revealElements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        element.style.transitionDelay = `${index * 0.1}s`;
         
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
+        setTimeout(() => {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }, 500);
+    });
 });
 
-// Handle page visibility changes for performance
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        // Pause animations when tab is not visible
-        document.body.style.animationPlayState = 'paused';
-    } else {
-        // Resume animations when tab becomes visible
-        document.body.style.animationPlayState = 'running';
+// Add floating code animation styles
+const floatingCodeStyles = `
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0px) rotate(0deg);
+        opacity: 0;
     }
-});
+    10% {
+        opacity: 0.1;
+    }
+    90% {
+        opacity: 0.1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+`;
 
-// Handle window resize for responsive adjustments
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-        // Close mobile menu on resize to desktop
-        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    }, 250);
-});
+// Inject floating code styles
+const styleElement = document.createElement('style');
+styleElement.textContent = floatingCodeStyles;
+document.head.appendChild(styleElement);
 
-// Error handling for graceful degradation
-window.addEventListener('error', (e) => {
-    console.error('JavaScript error occurred:', e.error);
-    // Ensure basic functionality still works even if JavaScript fails
-});
+// Smooth scrolling polyfill for older browsers
+if (!CSS.supports('scroll-behavior', 'smooth')) {
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                const duration = 1000;
+                const start = window.pageYOffset;
+                const distance = offsetTop - start;
+                const startTime = performance.now();
 
-// Service worker registration for progressive web app features (optional)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // Uncomment the following lines if you want to add a service worker
-        // navigator.serviceWorker.register('/sw.js')
-        //     .then(registration => console.log('SW registered'))
-        //     .catch(error => console.log('SW registration failed'));
+                function animateScroll(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
+                    
+                    window.scrollTo(0, start + distance * easeProgress);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateScroll);
+                    }
+                }
+                
+                requestAnimationFrame(animateScroll);
+            }
+        });
     });
 }
