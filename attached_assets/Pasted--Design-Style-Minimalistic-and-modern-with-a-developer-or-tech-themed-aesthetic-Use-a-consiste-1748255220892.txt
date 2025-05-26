@@ -1,0 +1,91 @@
+🔹 Design Style:
+Minimalistic and modern, with a developer or tech-themed aesthetic.
+
+Use a consistent color palette — feel free to choose cool tones (blues, greys, whites) or something that matches a developer’s identity.
+
+Include subtle animations on scroll and hover for a dynamic feel.
+
+Use icons or illustrations related to coding or development.
+
+🧩 Sections & Content:
+1. Navbar (Sticky on top)
+Contains links to the sections: Home, About, Projects, Skills, Contact.
+
+Smooth scroll on click.
+
+Highlight the current section as the user scrolls.
+
+2. Home (Hero Section)
+A powerful introduction with:
+
+My name: Shivansh Pawar
+
+A short headline like: “Web Developer | Turning Ideas into Digital Reality”
+
+A short paragraph or tagline introducing myself.
+
+Call-to-action button: “View My Work” (scrolls to Projects)
+
+Optionally, a developer-themed background or animated code effect.
+
+3. About Me
+A brief paragraph describing:
+
+Who I am.
+
+My passion for web development.
+
+Technologies I work with.
+
+Include a small photo or developer illustration.
+
+4. Projects
+Showcase 3–5 key projects.
+
+Each project should include:
+
+Title
+
+Screenshot or image preview
+
+Brief description
+
+Technologies used (icons or tags)
+
+Link to GitHub repo and live demo (if available)
+
+5. Skills
+Display key frontend and backend technologies.
+
+Use icons or progress bars/pie charts to show proficiency (HTML, CSS, JavaScript, React, etc.)
+
+Optionally mention tools and platforms (Git, VS Code, GitHub, Figma, etc.)
+
+6. Contact
+Include a simple contact form with fields: Name, Email, Message.
+
+Include an email link.
+
+Also add social media links: GitHub, LinkedIn, etc. (icons with links)
+
+🔧 Technical Requirements:
+Fully responsive for mobile, tablet, and desktop.
+
+Use HTML, CSS, and JavaScript (or optionally React or Tailwind if preferred).
+
+Implement scroll animation libraries (like AOS or ScrollReveal) for extra polish.
+
+Add SEO-friendly structure (meta tags, semantic HTML).
+
+Fast loading and optimized images.
+
+🎯 Goal:
+The final result should:
+
+Clearly showcase me as a web developer.
+
+Look professional yet personal.
+
+Be easy to navigate and visually impressive.
+
+Make clients or employers want to contact me or explore my work.
