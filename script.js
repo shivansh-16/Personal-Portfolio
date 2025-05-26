@@ -1,12 +1,78 @@
-// Initialize AOS (Animate On Scroll)
-document.addEventListener('DOMContentLoaded', function() {
-    AOS.init({
-        duration: 800,
-        easing: 'ease-out',
-        once: true,
-        offset: 100
-    });
-});
+// Simple Animation System (Lightweight AOS Alternative)
+class SimpleAnimations {
+    constructor() {
+        this.animatedElements = [];
+        this.init();
+    }
+
+    init() {
+        // Find all elements with data-aos attributes
+        const elements = document.querySelectorAll('[data-aos]');
+        elements.forEach((element, index) => {
+            const animationType = element.getAttribute('data-aos') || 'fade-up';
+            const delay = parseInt(element.getAttribute('data-aos-delay')) || 0;
+            const duration = parseInt(element.getAttribute('data-aos-duration')) || 800;
+            
+            this.animatedElements.push({
+                element,
+                animationType,
+                delay,
+                duration,
+                animated: false
+            });
+            
+            // Set initial state
+            element.style.opacity = '0';
+            element.style.transform = this.getInitialTransform(animationType);
+            element.style.transition = `all ${duration}ms ease-out`;
+        });
+
+        this.setupIntersectionObserver();
+    }
+
+    getInitialTransform(type) {
+        switch(type) {
+            case 'fade-up': return 'translateY(30px)';
+            case 'fade-down': return 'translateY(-30px)';
+            case 'fade-left': return 'translateX(30px)';
+            case 'fade-right': return 'translateX(-30px)';
+            case 'zoom-in': return 'scale(0.8)';
+            case 'zoom-out': return 'scale(1.2)';
+            default: return 'translateY(30px)';
+        }
+    }
+
+    getFinalTransform() {
+        return 'translateY(0) translateX(0) scale(1)';
+    }
+
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const animationData = this.animatedElements.find(
+                        item => item.element === entry.target
+                    );
+                    
+                    if (animationData && !animationData.animated) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = this.getFinalTransform();
+                            animationData.animated = true;
+                        }, animationData.delay);
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        this.animatedElements.forEach(item => {
+            observer.observe(item.element);
+        });
+    }
+}
 
 // DOM Elements
 const navbar = document.getElementById('navbar');
@@ -599,6 +665,9 @@ class PerformanceOptimizer {
 
 // Initialize all components when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize custom animation system
+    new SimpleAnimations();
+    
     // Initialize navigation
     new Navigation();
     
@@ -619,9 +688,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize contact form
     new ContactForm(contactForm);
-    
-    // Initialize background animation
-    new CodeBackgroundAnimation();
     
     // Initialize accessibility enhancements
     new AccessibilityEnhancer();
