@@ -444,19 +444,31 @@ class ContactForm {
         };
 
         try {
-            // Initialize EmailJS (you'll need to replace these with your actual credentials)
-            // Get these from https://www.emailjs.com/ after creating a free account
-            const PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY'; // Replace with your public key
-            const SERVICE_ID = 'YOUR_SERVICE_ID'; // Replace with your service ID  
-            const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // Replace with your template ID
-
-            // Send email using EmailJS
-            const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+            // Check if CONFIG is available and EmailJS credentials are set
+            if (typeof CONFIG !== 'undefined' && 
+                CONFIG.emailjs.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY' &&
+                CONFIG.emailjs.serviceId !== 'YOUR_SERVICE_ID' &&
+                CONFIG.emailjs.templateId !== 'YOUR_TEMPLATE_ID') {
+                
+                // Send email using EmailJS with config values
+                const response = await emailjs.send(
+                    CONFIG.emailjs.serviceId, 
+                    CONFIG.emailjs.templateId, 
+                    templateParams, 
+                    CONFIG.emailjs.publicKey
+                );
             
-            if (response.status === 200) {
-                return Promise.resolve();
+                if (response.status === 200) {
+                    return Promise.resolve();
+                } else {
+                    throw new Error('Failed to send email');
+                }
             } else {
-                throw new Error('Failed to send email');
+                // Fallback: For now, simulate success for demo purposes
+                // Remove this setTimeout and throw error once EmailJS is configured
+                return new Promise((resolve) => {
+                    setTimeout(resolve, 1500);
+                });
             }
         } catch (error) {
             // Fallback: For now, simulate success for demo purposes
