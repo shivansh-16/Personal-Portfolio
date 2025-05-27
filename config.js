@@ -9,13 +9,13 @@ const CONFIG = {
         name: "Shivansh Pawar",
         title: "Web Developer",
         tagline: "Turning Ideas into Digital Reality",
-        email: "shivansh.pawar@example.com",
-        location: "Available for Remote Work",
+        email: "shivanshpawa57@gmail.com",
+        location: "Bhopal, MP ,India (Remote) ",
         
         // Social Links - Replace with your actual profiles
         social: {
-            github: "https://github.com/yourusername",
-            linkedin: "https://linkedin.com/in/yourusername", 
+            github: "https://github.com/shivansh-16",
+            linkedin: "https://www.linkedin.com/in/shivansh-pawar/", 
             twitter: "https://twitter.com/yourusername",
             instagram: "https://instagram.com/yourusername"
         }
@@ -24,14 +24,14 @@ const CONFIG = {
     // EmailJS Configuration
     // Sign up at https://www.emailjs.com/ and replace these values
     emailjs: {
-        publicKey: "YOUR_EMAILJS_PUBLIC_KEY",
-        serviceId: "YOUR_SERVICE_ID", 
-        templateId: "YOUR_TEMPLATE_ID",
+        publicKey: "-1GD7cl-qCDh1nMuX",
+        serviceId: "service_sgvo2q7", 
+        templateId: "template_8ao2wme",
         
         // Email template variables
         template: {
             to_name: "Shivansh Pawar",
-            to_email: "your-email@example.com"
+            to_email: "shivanshpawar57@gmail.com"
         }
     },
 

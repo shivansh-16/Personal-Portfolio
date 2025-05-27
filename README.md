@@ -335,4 +335,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Built with ❤️ by Shivansh Pawar**
 
-*Last updated: 2024*
+*Last updated: 2025*
