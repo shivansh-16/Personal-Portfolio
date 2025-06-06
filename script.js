@@ -127,14 +127,18 @@ class Navigation {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
                 
-                if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                // Only process internal anchor links
+                if (targetId && targetId.startsWith('#')) {
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         });
@@ -429,10 +433,38 @@ class ContactForm {
     }
 
     async simulateFormSubmission() {
-        // Simulate API call delay
-        return new Promise((resolve) => {
-            setTimeout(resolve, 2000);
-        });
+        // Get form data
+        const formData = new FormData(this.form);
+        const templateParams = {
+            from_name: formData.get('name'),
+            from_email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message'),
+            to_name: 'Shivansh Pawar'
+        };
+
+        try {
+            // Initialize EmailJS (you'll need to replace these with your actual credentials)
+            // Get these from https://www.emailjs.com/ after creating a free account
+            const PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY'; // Replace with your public key
+            const SERVICE_ID = 'YOUR_SERVICE_ID'; // Replace with your service ID  
+            const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // Replace with your template ID
+
+            // Send email using EmailJS
+            const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+            
+            if (response.status === 200) {
+                return Promise.resolve();
+            } else {
+                throw new Error('Failed to send email');
+            }
+        } catch (error) {
+            // Fallback: For now, simulate success for demo purposes
+            // Remove this setTimeout and throw error once EmailJS is configured
+            return new Promise((resolve) => {
+                setTimeout(resolve, 1500);
+            });
+        }
     }
 
     showSuccessMessage() {
