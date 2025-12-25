@@ -1420,11 +1420,6 @@ a:hover {
     margin: 0;
 }
 
-.view-all-projects {
-    text-align:center;
-    margin-top: 2rem;
-}
-
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .nav-menu {
