@@ -83,7 +83,7 @@ portfolio/
    ```bash
    # Python 3
    python -m http.server 3000
-
+   
    # Python 2
    python -SimpleHTTPServer 3000
    ```
